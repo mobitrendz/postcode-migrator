@@ -1,4 +1,4 @@
-# 📮 CSV to PostgreSQL Postcode Migrator
+# 📮 CSV to PostgreSQL - Postcode Migrator
 
 A robust Python utility designed to clean, deduplicate, and migrate Australian postcode data from a CSV source into a PostgreSQL database. This script leverages **Pandas** for high-performance data manipulation and **SQLModel** for seamless database integration.
 
@@ -31,22 +31,23 @@ git clone https://github.com/mobitrendz/postcode-migrator.git
 cd postcode-migrator
 ```
 
-2. **CPlace your data source:**
+2. **Place your data source:**
+
 Ensure the australian_postcodes.csv file is located in the root directory.
 
-3. **CInitialize the environment & install dependencies:**C
+3. **Initialize the environment & install dependencies:**
 
 
 ```bash
 uv sync
 ```
 
-4. **CConfigure the Database Connection:**
+4. **Configure the Database Connection:**
 
 Update the connection string in main() if your credentials differ:
 postgresql://<user>:<password>@localhost:5432/<database>
 
-5. **CRun the migration:**
+5. **Run the migration:**
 
 ```bash
 uv run python migration_script.py
@@ -55,10 +56,10 @@ uv run python migration_script.py
 ## 📖 Data Processing Logic
 
 The script performs the following transformations:
-1. **Column Selection:** Retains only `id`, `postcode`, locality, state, long, and lat.
+1. **Column Selection:** Retains only `id`, `postcode`, `locality`, `state`, `long`, and `lat`.
 2. **Administrative Filtering:** Removes localities ending in **BC** (Business Centre), **DC** (Distribution Centre), or **MC** (Mail Centre).
 3. **Deduplication:** Removes redundant rows where the postcode and locality pair are identical.
-4. **Database Load:** Transfers the final DataFrame to the postcodes table using the replace method to ensure a fresh dataset.
+4. **Database Load:** Transfers the final DataFrame to the `postcodes` table using the `replace` method to ensure a fresh dataset.
 
 ## 🛠️ Troubleshooting
 
