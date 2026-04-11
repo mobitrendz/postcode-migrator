@@ -1,7 +1,7 @@
 [project]
-name = "pandas-csv-to-postgres"
+name = "postcode-migrator"
 version = "0.1.0"
-description = "Add your description here"
+description = "CSV to PostgreSQL Postcode Migrator"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
