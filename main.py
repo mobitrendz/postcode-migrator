@@ -19,7 +19,6 @@ Data Processing Steps:
 import pandas as pd
 from sqlmodel import create_engine
 
-
 def main():
     """
     Load, clean, and migrate postcode data to PostgreSQL.
@@ -58,7 +57,7 @@ def main():
     df = df[~df.duplicated(subset=['postcode', 'locality'], keep='first')]
 
     # Display record count after processing
-    #print(df.count())
+    print(f"Number of records after processing: {df.shape[0]}")
 
     # Create PostgreSQL database connection and load cleaned data
     engine = create_engine('postgresql://postgres:admin@localhost:5432/test_postcode')
@@ -69,7 +68,9 @@ def main():
 # This ensures that main() runs only when this script is executed directly, not when imported as a module
 if __name__ == "__main__":
     try:
+        print("Starting postcode data migration...")
         main()
+        print("Postcode data migration completed successfully.")
     except FileNotFoundError as e:
         print(f"Error: {e}. Please ensure 'australian_postcodes.csv' exists in the current directory.")
     except Exception as e:
