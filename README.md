@@ -1,6 +1,6 @@
 # 📮 CSV to PostgreSQL - Postcode Migrator
 
-A robust Python utility designed to clean, deduplicate, and migrate Australian postcode data from a CSV source into a PostgreSQL database. This script leverages **Pandas** for high-performance data manipulation and **SQLModel** for seamless database integration.
+A robust Python utility designed to clean, deduplicate, and migrate postcode data from a CSV source into a PostgreSQL database. This script leverages **Pandas** for high-performance data manipulation and **SQLModel** for seamless database integration.
 
 ## 🚀 Features
 
@@ -33,7 +33,7 @@ cd postcode-migrator
 
 2. **Place your data source:**
 
-Ensure the australian_postcodes.csv file is located in the root directory.
+Ensure the postcodes.csv file is located in the root directory.
 
 3. **Initialize the environment & install dependencies:**
 
@@ -65,7 +65,7 @@ The script performs the following transformations:
 
 | Issue | Potential Cause | Solution |
 | :--- | :--- | :--- |
-| **FileNotFoundError** | `australian_postcodes.csv` is missing. | Place the CSV in the script's root folder. |
+| **FileNotFoundError** | `postcodes.csv` is missing. | Place the CSV in the script's root folder. |
 | **Connection Error** | PostgreSQL service is not running. | Start your local PostgreSQL server. |
 | **Authentication Error** | Wrong username or password. | Update the connection string in the script. |
 | **ModuleNotFoundError** | Dependencies not synced. | Run `uv sync` or `pip install pandas sqlmodel psycopg2-binary`. |

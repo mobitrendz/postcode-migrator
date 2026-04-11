@@ -18,13 +18,14 @@ Data Processing Steps:
 """
 import pandas as pd
 from sqlmodel import create_engine
+from sqlalchemy.exc import SQLAlchemyError
 
 def main():
     """
     Load, clean, and migrate postcode data to PostgreSQL.
     
     Process:
-    - Reads australian_postcodes.csv into a pandas DataFrame
+    - Reads postcodes.csv into a pandas DataFrame
     - Selects relevant columns for the database
     - Removes entries with locality names ending in ' BC', ' DC', or ' MC'
       (likely internal/administrative designations)
@@ -39,10 +40,10 @@ def main():
         
     Raises:
         ConnectionError: If unable to connect to PostgreSQL database
-        FileNotFoundError: If australian_postcodes.csv not found
+        FileNotFoundError: If postcodes.csv not found
     """
     # Load data from CSV file
-    df = pd.read_csv("australian_postcodes.csv")
+    df = pd.read_csv("postcodes.csv")
 
     # Select only relevant columns for the database
     df = df[['id', 'postcode', 'locality', 'state', 'long', 'lat']]
@@ -72,7 +73,9 @@ if __name__ == "__main__":
         main()
         print("Postcode data migration completed successfully.")
     except FileNotFoundError as e:
-        print(f"Error: {e}. Please ensure 'australian_postcodes.csv' exists in the current directory.")
-    except Exception as e:
+        print(f"Error: {e}. Please ensure 'postcodes.csv' exists in the current directory.")
+    except SQLAlchemyError as e:
         print(f"Database connection or processing error: {e}")    
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
 
