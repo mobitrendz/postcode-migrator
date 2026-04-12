@@ -49,10 +49,8 @@ def main():
     df = df[['id', 'postcode', 'locality', 'state', 'long', 'lat']]
 
     # Filter out invalid locality designations
-    # BC: Business Center, DC: Data Center, MC: Mail Center (internal designations)
-    df = df[~df['locality'].str.endswith(' BC')]
-    df = df[~df['locality'].str.endswith(' DC')]
-    df = df[~df['locality'].str.endswith(' MC')]
+    # BC: Business Center, DC: Delivery Center, MC: Mail Center (internal designations)
+    df = df[~df['locality'].str.endswith((' BC', ' DC', ' MC'))]
 
     # Remove duplicate postcode-locality pairs, keeping the first occurrence
     df = df[~df.duplicated(subset=['postcode', 'locality'], keep='first')]
@@ -71,11 +69,11 @@ if __name__ == "__main__":
     try:
         print("Starting postcode data migration...")
         main()
-        print("Postcode data migration completed successfully.")
+        print("✅Postcode data migration completed successfully.")
     except FileNotFoundError as e:
-        print(f"Error: {e}. Please ensure 'postcodes.csv' exists in the current directory.")
+        print(f"❌Error: {e}. Please ensure 'postcodes.csv' exists in the current directory.")
     except SQLAlchemyError as e:
         print(f"Database connection or processing error: {e}")    
     except Exception as e:
-        print(f"An unexpected error occurred: {e}")
+        print(f"❌An unexpected error occurred: {e}")
 
